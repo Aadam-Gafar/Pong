@@ -20,9 +20,10 @@ public class Paddle : MonoBehaviour
     void Update()
     {
         //KeyboardControls();
-        MobileControls();
+        //MobileControlsV1();
+        MobileControlsV2();
         AIMovement();
-        Clamping();
+        //Clamping();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,7 +65,7 @@ public class Paddle : MonoBehaviour
         }
     }
 
-    private void MobileControls()
+    private void MobileControlsV1()
     {
         float moveDir;
         if (!isAI)
@@ -89,6 +90,20 @@ public class Paddle : MonoBehaviour
                 moveDir = 0;
             }
             rb2D.velocity = new Vector2(moveDir * spd, 0);
+        }
+    }
+
+    private void MobileControlsV2()
+    {
+        if(!isAI)
+        {
+            // Find mouse position in world units (as opposed to pixels)
+            Vector2 mousePosition = Input.mousePosition;
+            Vector2 mouseTransform = Camera.main.ScreenToWorldPoint(mousePosition);
+
+            // Lerping paddle's x-position to the mouse's x-position
+            float newX = Mathf.Lerp(transform.position.x, mouseTransform.x, 1);
+            transform.position = new Vector2(newX, transform.position.y);
         }
     }
 
