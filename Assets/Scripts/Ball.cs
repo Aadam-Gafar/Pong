@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -13,6 +14,9 @@ public class Ball : MonoBehaviour
     public AudioSource winSFX;
     public AudioSource bounceSFX;
     public AudioSource lossSFX;
+
+    public int xBound;
+    public int yBound;
 
     private void Start()
     {
@@ -40,6 +44,11 @@ public class Ball : MonoBehaviour
         }
 
         bounceSFX.Play();
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        StartCoroutine(CheckBounds());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -70,5 +79,19 @@ public class Ball : MonoBehaviour
         rb2D.velocity = new Vector2(0, 0);
         transform.position = new Vector2(0, 0);
         Launch();
+    }
+
+    // Resets any balls that escape the level
+    private IEnumerator CheckBounds()
+    {
+        yield return new WaitForSeconds(5);
+        if (transform.position.x > xBound || transform.position.x < -xBound)
+        {
+            ResetBall();
+        }
+        else if (transform.position.y > yBound || transform.position.y < -yBound)
+        {
+            ResetBall();
+        }
     }
 }

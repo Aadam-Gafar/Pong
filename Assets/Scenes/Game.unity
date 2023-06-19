@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 8
+  spd: 5
   reaction: 0.2
   returnForce: 2
   angleForce: 2
