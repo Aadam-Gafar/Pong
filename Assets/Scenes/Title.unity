@@ -149,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2893856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 449690202dcd7a64981514be0d9c8069, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e4c74dfe7aba004fa9756670e73da19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2893858
@@ -454,11 +454,11 @@ RectTransform:
   m_Father: {fileID: 1150655389}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.00005722, y: 256}
-  m_SizeDelta: {x: 1920, y: 256}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -1805}
+  m_SizeDelta: {x: 1920, y: 269.372}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1994591547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -480,7 +480,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+    m_Font: {fileID: 12800000, guid: 38238d4cde6ac34489b29ce70f1204b1, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 1
@@ -534,10 +534,10 @@ RectTransform:
   m_Father: {fileID: 1150655389}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -256}
-  m_SizeDelta: {x: 1920, y: 256}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -994}
+  m_SizeDelta: {x: 0, y: 922.815}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2139046280
 MonoBehaviour:
@@ -560,12 +560,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+    m_Font: {fileID: 12800000, guid: 38238d4cde6ac34489b29ce70f1204b1, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 299
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
