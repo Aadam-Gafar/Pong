@@ -5,7 +5,8 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     public int spd;
-    public float force;
+    public float returnForce;
+    public float angleForce;
     public bool isAI;
     public float range;
     private Rigidbody2D rb2D;
@@ -17,27 +18,37 @@ public class Paddle : MonoBehaviour
 
     void Update()
     {
-        KeyboardControls();
-        //MobileControls();
+        //KeyboardControls();
+        MobileControls();
         Clamping();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Adds minor horizontal movement to prevent perpetual vertical motion
         if (gameObject.tag == "Paddle (player)" || gameObject.tag == "Paddle (AI)")
         {
             float randomForce = Random.Range(-0.5f, 0.5f);
             collision.rigidbody.AddForce(new Vector2(randomForce, 0), ForceMode2D.Impulse);
         }
 
+        // Adds impulse to ball when it hits paddle, thereby speeding up on each rally
         switch (gameObject.tag)
         {
             case "Paddle (player)":
-                collision.rigidbody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
+                collision.rigidbody.AddForce(new Vector2(0, returnForce), ForceMode2D.Impulse);
                 break;
             case "Paddle (AI)":
-                collision.rigidbody.AddForce(new Vector2(0, -force), ForceMode2D.Impulse);
+                collision.rigidbody.AddForce(new Vector2(0, -returnForce), ForceMode2D.Impulse);
                 break ;
+        }
+
+        // Allows the player to control ball trajectory with paddle edges
+        if (gameObject.CompareTag("Paddle (player)") || gameObject.CompareTag("Paddle (AI)"))
+        {
+            float difference = collision.transform.position.x - transform.position.x;
+            difference /= gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
+            collision.rigidbody.AddForce(new Vector2(difference * angleForce, 0), ForceMode2D.Impulse);
         }
     }
 
