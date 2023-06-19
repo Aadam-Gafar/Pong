@@ -8,6 +8,8 @@ public class Score : MonoBehaviour
     // Creating a global instance of Score.
     public static Score instance;
 
+    public int targetFPS;
+
     private int scorePlayer;
     private int scoreAI;
     public Text scoreText;
@@ -18,6 +20,9 @@ public class Score : MonoBehaviour
     }
     void Start()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFPS;
+
         scorePlayer = 0;
         scoreAI = 0;
         scoreText.text = $"{scorePlayer} - {scoreAI}";

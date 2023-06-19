@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Goal (player)
   - Goal (AI)
+  - Paddle (player)
+  - Paddle (AI)
   layers:
   - Default
   - TransparentFX

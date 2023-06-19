@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public int spd = 10;
+    public int spd;
+    public float force;
     public bool isAI;
     public float range;
     private Rigidbody2D rb2D;
@@ -19,6 +20,25 @@ public class Paddle : MonoBehaviour
         KeyboardControls();
         //MobileControls();
         Clamping();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (gameObject.tag == "Paddle (player)" || gameObject.tag == "Paddle (AI)")
+        {
+            float randomForce = Random.Range(-0.5f, 0.5f);
+            collision.rigidbody.AddForce(new Vector2(randomForce, 0), ForceMode2D.Impulse);
+        }
+
+        switch (gameObject.tag)
+        {
+            case "Paddle (player)":
+                collision.rigidbody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
+                break;
+            case "Paddle (AI)":
+                collision.rigidbody.AddForce(new Vector2(0, -force), ForceMode2D.Impulse);
+                break ;
+        }
     }
 
     private void KeyboardControls()
@@ -52,13 +72,20 @@ public class Paddle : MonoBehaviour
         float moveDir;
         if (!isAI)
         {
-            if (Input.mousePosition.x < Screen.width / 2)
+            if(Input.GetMouseButton(0))
             {
-                moveDir = -1;
-            }
-            else if (Input.mousePosition.x > Screen.width / 2)
-            {
-                moveDir = 1;
+                if (Input.mousePosition.x < Screen.width / 2)
+                {
+                    moveDir = -1;
+                }
+                else if (Input.mousePosition.x > Screen.width / 2)
+                {
+                    moveDir = 1;
+                }
+                else
+                {
+                    moveDir = 0;
+                }
             }
             else
             {
@@ -68,13 +95,17 @@ public class Paddle : MonoBehaviour
         else
         {
             GameObject ball = GameObject.Find("Ball");
-            if (ball.transform.position.x > transform.position.y)
+            if (ball.transform.position.x > transform.position.x)
             {
                 moveDir = 1;
             }
-            else
+            else if (ball.transform.position.x < transform.position.x)
             {
                 moveDir = -1;
+            }
+            else
+            {
+                moveDir = 0;
             }
         }
         rb2D.velocity = new Vector2(moveDir * spd, 0);
