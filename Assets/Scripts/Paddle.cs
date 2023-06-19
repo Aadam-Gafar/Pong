@@ -5,6 +5,7 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     public int spd;
+    public float reaction;
     public float returnForce;
     public float angleForce;
     public bool isAI;
@@ -102,24 +103,15 @@ public class Paddle : MonoBehaviour
             {
                 moveDir = 0;
             }
+            rb2D.velocity = new Vector2(moveDir * spd, 0);
         }
         else
         {
+            Debug.Log("AI code running!");
             GameObject ball = GameObject.Find("Ball");
-            if (ball.transform.position.x > transform.position.x)
-            {
-                moveDir = 1;
-            }
-            else if (ball.transform.position.x < transform.position.x)
-            {
-                moveDir = -1;
-            }
-            else
-            {
-                moveDir = 0;
-            }
+            float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, reaction);
+            transform.position = new Vector2(newX, transform.position.y);
         }
-        rb2D.velocity = new Vector2(moveDir * spd, 0);
     }
 
     private void Clamping()

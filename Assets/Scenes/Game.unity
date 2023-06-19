@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spd: 4
+  reaction: 0.1
   returnForce: 1
   angleForce: 3
   isAI: 1
@@ -944,6 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spd: 8
+  reaction: 0
   returnForce: 1
   angleForce: 3
   isAI: 0
