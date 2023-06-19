@@ -9,7 +9,6 @@ public class Paddle : MonoBehaviour
     public float returnForce;
     public float angleForce;
     public bool isAI;
-    public float range;
     private Rigidbody2D rb2D;
 
     void Start()
@@ -19,11 +18,9 @@ public class Paddle : MonoBehaviour
 
     void Update()
     {
-        //KeyboardControls();
-        //MobileControlsV1();
-        MobileControlsV2();
+        Movement();
         AIMovement();
-        //Clamping();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -93,7 +90,7 @@ public class Paddle : MonoBehaviour
         }
     }
 
-    private void MobileControlsV2()
+    private void Movement()
     {
         if(!isAI)
         {
@@ -115,12 +112,5 @@ public class Paddle : MonoBehaviour
             float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, reaction);
             transform.position = new Vector2(newX, transform.position.y);
         }
-    }
-
-    private void Clamping()
-    {
-        Vector3 position = transform.position;
-        position.x = Mathf.Clamp(position.x, -range, range);
-        transform.position = position;
     }
 }

@@ -15,9 +15,6 @@ public class Ball : MonoBehaviour
     public AudioSource bounceSFX;
     public AudioSource lossSFX;
 
-    public int xBound;
-    public int yBound;
-
     private void Start()
     {
         scoreInstance = Score.instance;
@@ -84,12 +81,15 @@ public class Ball : MonoBehaviour
     // Resets any balls that escape the level
     private IEnumerator CheckBounds()
     {
+        float xBound = Game.instance.screenWidth;
+        float yBound = Game.instance.screenHeight;
+
         yield return new WaitForSeconds(5);
-        if (transform.position.x > xBound || transform.position.x < -xBound)
+        if (transform.position.x > xBound/2 || transform.position.x < -xBound/2)
         {
             ResetBall();
         }
-        else if (transform.position.y > yBound || transform.position.y < -yBound)
+        else if (transform.position.y > yBound/2 || transform.position.y < -yBound/2)
         {
             ResetBall();
         }
