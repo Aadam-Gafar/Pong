@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
@@ -13,7 +14,11 @@ public class Score : MonoBehaviour
     private int scorePlayer;
     private int scoreAI;
     public Text scoreText;
+
+    private bool isCounting;
     private bool isPaused;
+    public GameObject pauseMenu;
+    public GameObject controlsMenu;
 
     private void Awake()
     {
@@ -32,25 +37,23 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (isPaused && Input.GetMouseButtonDown(0) && !isCounting)
         {
-            Pause();
-        }
-
-        if (isPaused && Input.GetMouseButtonDown(0))
-        {
+            isCounting = true;
             StartCoroutine(Resume());
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
-        scoreText.text = "PAUSED";
+        scoreText.text = "TAP TO RESUME";
+        pauseMenu.SetActive(false);
+        controlsMenu.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
     }
 
-    private IEnumerator Resume()
+    public IEnumerator Resume()
     {
         int time = 3;
         while (time > 0)
@@ -61,8 +64,16 @@ public class Score : MonoBehaviour
         }
 
         scoreText.text = $"{scorePlayer} - {scoreAI}";
+        pauseMenu.SetActive(true);
+        controlsMenu.SetActive(false);
         Time.timeScale = 1;
         isPaused = false;
+        isCounting = false;
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 
     private void CheckInstance()
