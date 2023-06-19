@@ -463,7 +463,7 @@ MonoBehaviour:
   spd: 4
   reaction: 0.1
   returnForce: 1
-  angleForce: 3
+  angleForce: 2
   isAI: 1
   range: 2.3
 --- !u!50 &505018738
@@ -947,7 +947,7 @@ MonoBehaviour:
   spd: 8
   reaction: 0
   returnForce: 1
-  angleForce: 3
+  angleForce: 2
   isAI: 0
   range: 2.3
 --- !u!50 &1593955506
@@ -1829,6 +1829,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetFPS: 60
   scoreText: {fileID: 1970080570}
+  pauseMenu: {fileID: 0}
+  countdownText: {fileID: 0}
 --- !u!4 &2145545150
 Transform:
   m_ObjectHideFlags: 0

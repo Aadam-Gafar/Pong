@@ -21,6 +21,7 @@ public class Paddle : MonoBehaviour
     {
         //KeyboardControls();
         MobileControls();
+        AIMovement();
         Clamping();
     }
 
@@ -59,24 +60,8 @@ public class Paddle : MonoBehaviour
         if (!isAI)
         {
             moveDir = Input.GetAxis("Horizontal");
+            rb2D.velocity = new Vector2(moveDir * spd, 0);
         }
-        else
-        {
-            GameObject ball = GameObject.Find("Ball");
-            if (ball.transform.position.x > transform.position.x)
-            {
-                moveDir = 1;
-            }
-            else if (ball.transform.position.x < transform.position.x)
-            {
-                moveDir = -1;
-            }
-            else
-            {
-                moveDir = 0;
-            }
-        }
-        rb2D.velocity = new Vector2(moveDir * spd, 0);
     }
 
     private void MobileControls()
@@ -105,9 +90,12 @@ public class Paddle : MonoBehaviour
             }
             rb2D.velocity = new Vector2(moveDir * spd, 0);
         }
-        else
+    }
+
+    private void AIMovement()
+    {
+        if(isAI)
         {
-            Debug.Log("AI code running!");
             GameObject ball = GameObject.Find("Ball");
             float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, reaction);
             transform.position = new Vector2(newX, transform.position.y);
