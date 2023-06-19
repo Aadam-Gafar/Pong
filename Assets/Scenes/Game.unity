@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spd: 4
   reaction: 0.1
-  returnForce: 1
+  returnForce: 10
   angleForce: 2
   isAI: 1
   range: 2.3
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spd: 8
   reaction: 0
-  returnForce: 1
+  returnForce: 10
   angleForce: 2
   isAI: 0
   range: 2.3
@@ -1136,7 +1136,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score
+  m_Text: TAP TO BEGIN
 --- !u!222 &1970080571
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1292,6 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spd: 3
+  max: 50
   winSFX: {fileID: 2102578619}
   bounceSFX: {fileID: 2102578618}
   lossSFX: {fileID: 2102578617}
@@ -1829,8 +1830,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetFPS: 60
   scoreText: {fileID: 1970080570}
-  pauseMenu: {fileID: 0}
-  countdownText: {fileID: 0}
 --- !u!4 &2145545150
 Transform:
   m_ObjectHideFlags: 0

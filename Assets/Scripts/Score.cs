@@ -19,6 +19,7 @@ public class Score : MonoBehaviour
     {
         CheckInstance();
         Pause();
+        scoreText.text = "TAP TO BEGIN";
     }
     void Start()
     {

@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
     private Score scoreInstance;
     private Rigidbody2D rb2D;
     public int spd;
+    public int max;
 
     public AudioSource winSFX;
     public AudioSource bounceSFX;
@@ -21,6 +22,12 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Imposes a speed limit on the ball
+        if (rb2D.velocity.magnitude > max)
+        {
+            rb2D.velocity = rb2D.velocity.normalized * max;
+        }
+
         bounceSFX.Play();
     }
 
