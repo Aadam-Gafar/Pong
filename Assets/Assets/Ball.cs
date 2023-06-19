@@ -8,6 +8,10 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb2D;
     public int spd;
 
+    public AudioSource winSFX;
+    public AudioSource bounceSFX;
+    public AudioSource lossSFX;
+
     private void Start()
     {
         scoreInstance = Score.instance;
@@ -15,14 +19,21 @@ public class Ball : MonoBehaviour
         Launch();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        bounceSFX.Play();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Goal (player)"))
         {
+            lossSFX.Play();
             scoreInstance.AIScored();
         }
         else if (other.gameObject.CompareTag("Goal (AI)"))
         {
+            winSFX.Play();
             scoreInstance.PlayerScored();
         }
         ResetBall();
