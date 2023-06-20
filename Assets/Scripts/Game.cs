@@ -51,15 +51,6 @@ public class Game : MonoBehaviour
         ScaleItems();
     }
 
-    private void Update()
-    {
-        CalculateScreen();
-        PositionWalls();
-        PositionGoals();
-        PositionPaddles();
-        ScaleItems();
-    }
-
     private void CalculateScreen()
     {
         // Converts screen dimensions in pixels to transform units

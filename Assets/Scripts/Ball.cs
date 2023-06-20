@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Score scoreInstance;
+    private Interface scoreInstance;
     private Rigidbody2D rb2D;
     public int spd;
     public int min;
@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        scoreInstance = Score.instance;
+        scoreInstance = Interface.instance;
         rb2D = GetComponent<Rigidbody2D>();
         Launch();
     }

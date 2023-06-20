@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Score : MonoBehaviour
+public class Interface : MonoBehaviour
 {
     // Creating a global instance of Score.
-    public static Score instance;
+    public static Interface instance;
 
     public int targetFPS;
 
@@ -23,9 +23,8 @@ public class Score : MonoBehaviour
     private void Awake()
     {
         CheckInstance();
-        Pause();
-        scoreText.text = "TAP TO BEGIN";
     }
+
     void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -33,28 +32,30 @@ public class Score : MonoBehaviour
 
         scorePlayer = 0;
         scoreAI = 0;
-    }
 
-    private void Update()
-    {
-        if (isPaused && Input.GetMouseButtonDown(0) && !isCounting)
-        {
-            isCounting = true;
-            StartCoroutine(Resume());
-        }
+        Time.timeScale = 0;
+        pauseMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+        StartCoroutine(Countdown());
     }
 
     public void Pause()
     {
-        scoreText.text = "TAP TO RESUME";
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(true);
         Time.timeScale = 0;
-        isPaused = true;
     }
 
-    public IEnumerator Resume()
+    public void Resume()
     {
+        StartCoroutine(Countdown());
+    }
+
+    public IEnumerator Countdown()
+    {
+        pauseMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+
         int time = 3;
         while (time > 0)
         {
@@ -63,17 +64,19 @@ public class Score : MonoBehaviour
             time--;
         }
 
-        scoreText.text = $"{scorePlayer} - {scoreAI}";
         pauseMenu.SetActive(true);
-        controlsMenu.SetActive(false);
+        scoreText.text = $"{scorePlayer} - {scoreAI}";
         Time.timeScale = 1;
-        isPaused = false;
-        isCounting = false;
     }
 
     public void LoadGame()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    public void LoadTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 
     private void CheckInstance()
