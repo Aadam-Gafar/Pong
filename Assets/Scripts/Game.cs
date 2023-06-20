@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -33,8 +34,6 @@ public class Game : MonoBehaviour
     public float ballScale;
     public GameObject ball;
 
-    public int difficulty;
-
     private void Awake()
     {
         if (instance == null)
@@ -49,11 +48,14 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        CalculateScreen();
-        PositionWalls();
-        PositionGoals();
-        PositionPaddles();
-        ScaleItems();
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            CalculateScreen();
+            PositionWalls();
+            PositionGoals();
+            PositionPaddles();
+            ScaleItems();
+        }
     }
 
     private void CalculateScreen()
@@ -95,9 +97,10 @@ public class Game : MonoBehaviour
 
     private void ScaleItems()
     {
+        int difficulty = PlayerPrefs.GetInt("Difficulty");
         float paddleHeight = screenWidth * paddleSizeG / 10;
 
-        switch (Game.instance.difficulty)
+        switch (difficulty)
         {
             case 0:
                 paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeE, paddleHeight);

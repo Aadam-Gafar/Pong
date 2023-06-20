@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public float reaction;
+    private float lerpG;
+    public float lerpE;
+    public float lerpM;
+    public float lerpH;
+
     public float returnForce;
     public float angleForce;
     public bool isAI;
@@ -71,23 +75,24 @@ public class Paddle : MonoBehaviour
         if(isAI)
         {
             GameObject ball = GameObject.Find("Ball");
-            float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, reaction);
+            float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, lerpG);
             transform.position = new Vector2(newX, transform.position.y);
         }
     }
 
     private void SetDifficulty()
     {
-        switch (Game.instance.difficulty)
+        int difficulty = PlayerPrefs.GetInt("Difficulty");
+        switch (difficulty)
         {
             case 0:
-                reaction = 0.12f;
+                lerpG = lerpE;
                 break;
             case 1:
-                reaction = 0.2f;
+                lerpG = lerpM;
                 break;
             case 2:
-                reaction = 0.24f;
+                lerpG = lerpH;
                 break;
         }
     }

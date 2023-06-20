@@ -736,7 +736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reaction: 0.25
+  lerpE: 0.08
+  lerpM: 0.12
+  lerpH: 0.16
   returnForce: 2
   angleForce: 2
   isAI: 1
@@ -1008,7 +1010,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QUIT
+  m_Text: MENU
 --- !u!222 &779707344
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1392,7 +1394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reaction: 0
+  lerpE: 1
+  lerpM: 1
+  lerpH: 1
   returnForce: 2
   angleForce: 2
   isAI: 0
@@ -1591,7 +1595,7 @@ MonoBehaviour:
   goalAI: {fileID: 859811231}
   paddleHeight: 0
   paddleWidth: 1
-  paddleSizeG: 0.15
+  paddleSizeG: 0.25
   paddleSizeE: 0.3
   paddleSizeM: 0.2
   paddleSizeH: 0.1
@@ -1599,7 +1603,6 @@ MonoBehaviour:
   paddleAI: {fileID: 505018733}
   ballScale: 0.025
   ball: {fileID: 2102578611}
-  difficulty: 0
 --- !u!4 &1854076275
 Transform:
   m_ObjectHideFlags: 0
@@ -1978,9 +1981,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea384ba1055cf8042bb340959cab919a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 4
-  min: 4
-  max: 25
+  spdE: 3
+  spdM: 5
+  spdH: 7
+  maxE: 6
+  maxM: 10
+  maxH: 14
   winSFX: {fileID: 2102578619}
   bounceSFX: {fileID: 2102578618}
   lossSFX: {fileID: 2102578617}

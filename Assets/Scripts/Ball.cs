@@ -7,9 +7,17 @@ public class Ball : MonoBehaviour
 {
     private Interface scoreInstance;
     private Rigidbody2D rb2D;
-    public int spd;
-    public int min;
-    public int max;
+
+    private int spdG;
+    public int spdE;
+    public int spdM;
+    public int spdH;
+
+    private int maxG;
+    public int maxE;
+    public int maxM;
+    public int maxH;
+
 
     public AudioSource winSFX;
     public AudioSource bounceSFX;
@@ -19,45 +27,27 @@ public class Ball : MonoBehaviour
     {
         scoreInstance = Interface.instance;
         rb2D = GetComponent<Rigidbody2D>();
-
-        switch(Game.instance.difficulty)
-        {
-            case 0:
-                spd = 3;
-                min = 3;
-                max = 10;
-                break;
-            case 1:
-                spd = 4;
-                min = 4;
-                max = 20;
-                break;
-            case 2:
-                spd = 5;
-                min = 5;
-                max = 30;
-                break;
-        }
-
+        
+        SetDifficulty();
         Launch();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Imposes a max speed limit (both axes) on the ball
-        if (rb2D.velocity.magnitude > max)
+        if (rb2D.velocity.magnitude > maxG)
         {
-            rb2D.velocity = rb2D.velocity.normalized * max;
+            rb2D.velocity = rb2D.velocity.normalized * maxG;
         }
 
         // Imposes a min speed limit (y-axis) on the ball
-        if (rb2D.velocity.y > 0 && rb2D.velocity.y < min)
+        if (rb2D.velocity.y > 0 && rb2D.velocity.y < spdG)
         {
-            rb2D.velocity = new Vector2(rb2D.velocity.x, min);
+            rb2D.velocity = new Vector2(rb2D.velocity.x, spdG);
         }
-        else if (rb2D.velocity.y < 0 && rb2D.velocity.y < min)
+        else if (rb2D.velocity.y < 0 && rb2D.velocity.y < spdG)
         {
-            rb2D.velocity = new Vector2(rb2D.velocity.x, -min);
+            rb2D.velocity = new Vector2(rb2D.velocity.x, -spdG);
         }
 
         bounceSFX.Play();
@@ -88,7 +78,7 @@ public class Ball : MonoBehaviour
         // If direction is 0, set it to -1. Else, set it to 1.
         int xDir = Random.Range(0, 2) == 0 ? -1 : 1;
         int yDir = Random.Range(0, 2) == 0 ? -1 : 1;
-        rb2D.velocity = new Vector2(spd * xDir, spd * yDir);
+        rb2D.velocity = new Vector2(spdG * xDir, spdG * yDir);
     }
 
     private void ResetBall()
@@ -98,9 +88,9 @@ public class Ball : MonoBehaviour
         Launch();
     }
 
-    // Resets any balls that escape the level
     private IEnumerator CheckBounds()
     {
+        // Resets any balls that escape the level
         float xBound = Game.instance.screenWidth;
         float yBound = Game.instance.screenHeight;
 
@@ -112,6 +102,27 @@ public class Ball : MonoBehaviour
         else if (transform.position.y > yBound/2 || transform.position.y < -yBound/2)
         {
             ResetBall();
+        }
+    }
+
+    private void SetDifficulty()
+    {
+        int difficulty = PlayerPrefs.GetInt("Difficulty");
+
+        switch (difficulty)
+        {
+            case 0:
+                spdG = spdE;
+                maxG = maxE;
+                break;
+            case 1:
+                spdG = spdM;
+                maxG = maxM;
+                break;
+            case 2:
+                spdG = spdH;
+                maxG = maxH;
+                break;
         }
     }
 }
