@@ -6,17 +6,25 @@ using UnityEngine.UI;
 
 public class Interface : MonoBehaviour
 {
-    // Creating a global instance of Score.
+    // Creating a global instance of Interface.
     public static Interface instance;
 
+
+    // Title scene variables.
+    public GameObject mainMenu;
+    public GameObject difficultyMenu;
+    public GameObject creditsMenu;
+
+    public AudioSource clickSFX;
+    public AudioSource startSFX;
+
+    // Game scene variables.
     public int targetFPS;
 
     private int scorePlayer;
     private int scoreAI;
     public Text scoreText;
 
-    private bool isCounting;
-    private bool isPaused;
     public GameObject pauseMenu;
     public GameObject controlsMenu;
 
@@ -27,18 +35,72 @@ public class Interface : MonoBehaviour
 
     void Start()
     {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = targetFPS;
+        if(SceneManager.GetActiveScene().name == "Game")
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = targetFPS;
 
-        scorePlayer = 0;
-        scoreAI = 0;
+            scorePlayer = 0;
+            scoreAI = 0;
 
-        Time.timeScale = 0;
-        pauseMenu.SetActive(false);
-        controlsMenu.SetActive(false);
-        StartCoroutine(Countdown());
+            Time.timeScale = 0;
+            pauseMenu.SetActive(false);
+            controlsMenu.SetActive(false);
+            StartCoroutine(Countdown());
+        }
+        else if (SceneManager.GetActiveScene().name == "Title")
+        {
+            mainMenu.SetActive(true);
+            difficultyMenu.SetActive(false);
+            creditsMenu.SetActive(false);
+        }
     }
 
+    #region Title scene methods
+    public void ChooseDifficulty()
+    {
+        mainMenu.SetActive(false);
+        difficultyMenu.SetActive(true);
+    }
+
+    public void ChooseEasy()
+    {
+        PlayerPrefs.SetInt("Difficulty", 0);
+        LoadGame();
+    }
+
+    public void ChooseMedium()
+    {
+        PlayerPrefs.SetInt("Difficulty", 1);
+        LoadGame();
+    }
+
+    public void ChooseHard()
+    {
+        PlayerPrefs.SetInt("Difficulty", 2);
+        LoadGame();
+    }
+
+    public void ViewCredits()
+    {
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
+    }
+
+    public void ReturnToMenu()
+    {
+        mainMenu.SetActive(true);
+        creditsMenu.SetActive(false);
+        difficultyMenu.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    #endregion
+
+    #region Game scene methods
     public void Pause()
     {
         pauseMenu.SetActive(false);
@@ -69,16 +131,6 @@ public class Interface : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void LoadGame()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
-    public void LoadTitle()
-    {
-        SceneManager.LoadScene("Title");
-    }
-
     private void CheckInstance()
     {
         if (instance == null)
@@ -102,4 +154,27 @@ public class Interface : MonoBehaviour
         scoreAI++;
         scoreText.text = $"{scorePlayer} - {scoreAI}";
     }
+    #endregion
+
+    #region Shared methods
+    public void PlayClick()
+    {
+        clickSFX.Play();
+    }
+
+    public void PlayStart()
+    {
+        startSFX.Play();
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void LoadTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
+    #endregion
 }

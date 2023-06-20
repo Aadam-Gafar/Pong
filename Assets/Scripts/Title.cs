@@ -7,11 +7,26 @@ public class Title : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject difficultyMenu;
+    public GameObject creditsMenu;
+
+    public AudioSource clickSFX;
+    public AudioSource startSFX;
 
     private void Start()
     {
         mainMenu.SetActive(true);
         difficultyMenu.SetActive(false);
+        creditsMenu.SetActive(false);
+    }
+
+    public void PlayClick()
+    {
+        clickSFX.Play();
+    }
+
+    public void PlayStart()
+    {
+        startSFX.Play();
     }
 
     public void Quit()
@@ -25,21 +40,40 @@ public class Title : MonoBehaviour
         difficultyMenu.SetActive(true);
     }
 
+    public void ViewCredits()
+    {
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
+    }
+
+    public void ReturnToMenu()
+    {
+        mainMenu.SetActive(true);
+        creditsMenu.SetActive(false);
+        difficultyMenu.SetActive(false);
+    }
+
+    public IEnumerator LoadGame()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Game");
+    }
+
     public void ChooseEasy()
     {
         PlayerPrefs.SetInt("Difficulty", 0);
-        SceneManager.LoadScene("Game");
+        StartCoroutine(LoadGame());
     }
 
     public void ChooseMedium()
     {
         PlayerPrefs.SetInt("Difficulty", 1);
-        SceneManager.LoadScene("Game");
+        StartCoroutine(LoadGame());
     }
 
     public void ChooseHard()
     {
         PlayerPrefs.SetInt("Difficulty", 2);
-        SceneManager.LoadScene("Game");
+        StartCoroutine(LoadGame());
     }
 }
