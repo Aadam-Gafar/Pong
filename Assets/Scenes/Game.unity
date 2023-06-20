@@ -736,8 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 5
-  reaction: 1
+  reaction: 0.25
   returnForce: 2
   angleForce: 2
   isAI: 1
@@ -1393,7 +1392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 8
   reaction: 0
   returnForce: 2
   angleForce: 2
@@ -1593,11 +1591,15 @@ MonoBehaviour:
   goalAI: {fileID: 859811231}
   paddleHeight: 0
   paddleWidth: 1
-  paddleScale: 0.2
+  paddleSizeG: 0.15
+  paddleSizeE: 0.3
+  paddleSizeM: 0.2
+  paddleSizeH: 0.1
   paddlePlayer: {fileID: 1593955501}
   paddleAI: {fileID: 505018733}
   ballScale: 0.025
   ball: {fileID: 2102578611}
+  difficulty: 0
 --- !u!4 &1854076275
 Transform:
   m_ObjectHideFlags: 0
@@ -1648,7 +1650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 140}
+  m_AnchoredPosition: {x: 0, y: 280}
   m_SizeDelta: {x: 0, y: 318.774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970080570

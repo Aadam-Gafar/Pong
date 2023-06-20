@@ -23,12 +23,17 @@ public class Game : MonoBehaviour
 
     [HideInInspector] public float paddleHeight;
     [HideInInspector] public float paddleWidth;
-    public float paddleScale;
+    public float paddleSizeG;
+    public float paddleSizeE;
+    public float paddleSizeM;
+    public float paddleSizeH;
     public GameObject paddlePlayer;
     public GameObject paddleAI;
 
     public float ballScale;
     public GameObject ball;
+
+    public int difficulty;
 
     private void Awake()
     {
@@ -90,12 +95,25 @@ public class Game : MonoBehaviour
 
     private void ScaleItems()
     {
+        float paddleHeight = screenWidth * paddleSizeG / 10;
+
+        switch (Game.instance.difficulty)
+        {
+            case 0:
+                paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeE, paddleHeight);
+                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeG, paddleHeight);
+                break;
+            case 1:
+                paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeM, paddleHeight);
+                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeG, paddleHeight);
+                break;
+            case 2:
+                paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeH, paddleHeight);
+                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeG, paddleHeight);
+                break;
+        }
+
         float ballDim = screenWidth * ballScale;
         ball.transform.localScale = new Vector2(ballDim, ballDim);
-
-        float paddleWidth = screenWidth * paddleScale;
-        float paddleHeight = screenWidth * paddleScale / 10;
-        paddlePlayer.transform.localScale = new Vector2(paddleWidth, paddleHeight);
-        paddleAI.transform.localScale = new Vector2(paddleWidth, paddleHeight);
     }
 }

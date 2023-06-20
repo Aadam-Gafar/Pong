@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public int spd;
     public float reaction;
     public float returnForce;
     public float angleForce;
@@ -14,6 +13,7 @@ public class Paddle : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        SetDifficulty();
     }
 
     void Update()
@@ -52,44 +52,6 @@ public class Paddle : MonoBehaviour
         }
     }
 
-    private void KeyboardControls()
-    {
-        float moveDir;
-        if (!isAI)
-        {
-            moveDir = Input.GetAxis("Horizontal");
-            rb2D.velocity = new Vector2(moveDir * spd, 0);
-        }
-    }
-
-    private void MobileControlsV1()
-    {
-        float moveDir;
-        if (!isAI)
-        {
-            if(Input.GetMouseButton(0))
-            {
-                if (Input.mousePosition.x < Screen.width / 2)
-                {
-                    moveDir = -1;
-                }
-                else if (Input.mousePosition.x > Screen.width / 2)
-                {
-                    moveDir = 1;
-                }
-                else
-                {
-                    moveDir = 0;
-                }
-            }
-            else
-            {
-                moveDir = 0;
-            }
-            rb2D.velocity = new Vector2(moveDir * spd, 0);
-        }
-    }
-
     private void Movement()
     {
         if(!isAI)
@@ -111,6 +73,22 @@ public class Paddle : MonoBehaviour
             GameObject ball = GameObject.Find("Ball");
             float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, reaction);
             transform.position = new Vector2(newX, transform.position.y);
+        }
+    }
+
+    private void SetDifficulty()
+    {
+        switch (Game.instance.difficulty)
+        {
+            case 0:
+                reaction = 0.12f;
+                break;
+            case 1:
+                reaction = 0.2f;
+                break;
+            case 2:
+                reaction = 0.24f;
+                break;
         }
     }
 }

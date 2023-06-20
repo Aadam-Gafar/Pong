@@ -19,6 +19,26 @@ public class Ball : MonoBehaviour
     {
         scoreInstance = Interface.instance;
         rb2D = GetComponent<Rigidbody2D>();
+
+        switch(Game.instance.difficulty)
+        {
+            case 0:
+                spd = 3;
+                min = 3;
+                max = 10;
+                break;
+            case 1:
+                spd = 4;
+                min = 4;
+                max = 20;
+                break;
+            case 2:
+                spd = 5;
+                min = 5;
+                max = 30;
+                break;
+        }
+
         Launch();
     }
 
