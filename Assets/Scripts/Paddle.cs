@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    private float lerpG;
-    public float lerpE;
-    public float lerpM;
-    public float lerpH;
-
-    public float returnForce;
+    private float skillLvl;
+    public float speedLim;
+    public float rtnForce;
     public float angleForce;
     public bool isAI;
     private Rigidbody2D rb2D;
@@ -27,7 +24,7 @@ public class Paddle : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         // Adds minor horizontal movement to prevent perpetual vertical motion
         if (gameObject.tag == "Paddle (player)" || gameObject.tag == "Paddle (AI)")
@@ -37,14 +34,19 @@ public class Paddle : MonoBehaviour
         }
 
         // Adds impulse to ball when it hits paddle, thereby speeding up on each rally
-        switch (gameObject.tag)
+        if (collision.rigidbody.velocity.magnitude < speedLim)
         {
-            case "Paddle (player)":
-                collision.rigidbody.AddForce(new Vector2(0, returnForce), ForceMode2D.Impulse);
-                break;
-            case "Paddle (AI)":
-                collision.rigidbody.AddForce(new Vector2(0, -returnForce), ForceMode2D.Impulse);
-                break ;
+            Debug.Log("Inside if.");
+            switch (gameObject.tag)
+            {
+                case "Paddle (player)":
+                    collision.rigidbody.AddForce(new Vector2(0, rtnForce), ForceMode2D.Impulse);
+                    break;
+                case "Paddle (AI)":
+                    Debug.Log("In impulse script.");
+                    collision.rigidbody.AddForce(new Vector2(0, -rtnForce), ForceMode2D.Impulse);
+                    break;
+            }
         }
 
         // Allows the player to control ball trajectory with paddle edges
@@ -75,7 +77,7 @@ public class Paddle : MonoBehaviour
         if(isAI)
         {
             GameObject ball = GameObject.Find("Ball");
-            float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, lerpG);
+            float newX = Mathf.Lerp(transform.position.x, ball.transform.position.x, skillLvl);
             transform.position = new Vector2(newX, transform.position.y);
         }
     }
@@ -86,13 +88,19 @@ public class Paddle : MonoBehaviour
         switch (difficulty)
         {
             case 0:
-                lerpG = lerpE;
+                skillLvl = Game.instance.skillLvlE;
+                speedLim = Game.instance.spdLimE;
+                rtnForce = Game.instance.rtnForceE;
                 break;
             case 1:
-                lerpG = lerpM;
+                skillLvl = Game.instance.skillLvlM;
+                speedLim = Game.instance.spdLimM;
+                rtnForce = Game.instance.rtnForceM;
                 break;
             case 2:
-                lerpG = lerpH;
+                skillLvl = Game.instance.skillLvlH;
+                speedLim = Game.instance.spdLimH;
+                rtnForce = Game.instance.rtnForceH;
                 break;
         }
     }

@@ -718,7 +718,7 @@ Transform:
   m_GameObject: {fileID: 505018733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.5, z: 0}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 5.29, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -736,10 +736,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpE: 0.08
-  lerpM: 0.12
-  lerpH: 0.16
-  returnForce: 2
+  speedLim: 0
+  rtnForce: 0
   angleForce: 2
   isAI: 1
 --- !u!50 &505018738
@@ -1376,7 +1374,7 @@ Transform:
   m_GameObject: {fileID: 1593955501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 5.26, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1394,10 +1392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c184fa9ae6a8c64aaf982798d9d4472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpE: 1
-  lerpM: 1
-  lerpH: 1
-  returnForce: 2
+  speedLim: 0
+  rtnForce: 0
   angleForce: 2
   isAI: 0
 --- !u!50 &1593955506
@@ -1595,14 +1591,23 @@ MonoBehaviour:
   goalAI: {fileID: 859811231}
   paddleHeight: 0
   paddleWidth: 1
-  paddleSizeG: 0.25
-  paddleSizeE: 0.3
-  paddleSizeM: 0.2
-  paddleSizeH: 0.1
+  paddleSizeAI: 0.25
   paddlePlayer: {fileID: 1593955501}
   paddleAI: {fileID: 505018733}
   ballScale: 0.025
   ball: {fileID: 2102578611}
+  paddleSizeE: 0.3
+  spdLimE: 5
+  rtnForceE: 1
+  skillLvlE: 0.1
+  paddleSizeM: 0.2
+  spdLimM: 10
+  rtnForceM: 2
+  skillLvlM: 0.15
+  paddleSizeH: 0.1
+  spdLimH: 15
+  rtnForceH: 3
+  skillLvlH: 0.2
 --- !u!4 &1854076275
 Transform:
   m_ObjectHideFlags: 0
@@ -1981,12 +1986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea384ba1055cf8042bb340959cab919a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spdE: 3
-  spdM: 5
-  spdH: 7
-  maxE: 6
-  maxM: 10
-  maxH: 14
+  launchSpd: 3
   winSFX: {fileID: 2102578619}
   bounceSFX: {fileID: 2102578618}
   lossSFX: {fileID: 2102578617}
@@ -2004,7 +2004,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 69020e7fd35c2474a877b6772fb2706a, type: 2}
   m_Interpolate: 0

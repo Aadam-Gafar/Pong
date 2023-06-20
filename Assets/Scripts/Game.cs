@@ -23,15 +23,30 @@ public class Game : MonoBehaviour
 
     [HideInInspector] public float paddleHeight;
     [HideInInspector] public float paddleWidth;
-    public float paddleSizeG;
-    public float paddleSizeE;
-    public float paddleSizeM;
-    public float paddleSizeH;
+    public float paddleSizeAI;
     public GameObject paddlePlayer;
     public GameObject paddleAI;
 
     public float ballScale;
     public GameObject ball;
+
+    // Easy difficulty
+    public float paddleSizeE;
+    public float spdLimE;
+    public float rtnForceE;
+    public float skillLvlE;
+
+    // Medium difficulty
+    public float paddleSizeM;
+    public float spdLimM;
+    public float rtnForceM;
+    public float skillLvlM;
+
+    // Hard difficulty
+    public float paddleSizeH;
+    public float spdLimH;
+    public float rtnForceH;
+    public float skillLvlH;
 
     private void Awake()
     {
@@ -97,21 +112,21 @@ public class Game : MonoBehaviour
     private void ScaleItems()
     {
         int difficulty = PlayerPrefs.GetInt("Difficulty");
-        float paddleHeight = screenWidth * paddleSizeG / 10;
+        float paddleHeight = screenWidth * paddleSizeAI / 10;
 
         switch (difficulty)
         {
             case 0:
                 paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeE, paddleHeight);
-                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeG, paddleHeight);
+                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeAI, paddleHeight);
                 break;
             case 1:
                 paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeM, paddleHeight);
-                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeG, paddleHeight);
+                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeAI, paddleHeight);
                 break;
             case 2:
                 paddlePlayer.transform.localScale = new Vector2(screenWidth * paddleSizeH, paddleHeight);
-                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeG, paddleHeight);
+                paddleAI.transform.localScale = new Vector2(screenWidth * paddleSizeAI, paddleHeight);
                 break;
         }
 
