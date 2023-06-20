@@ -1683,7 +1683,6 @@ MonoBehaviour:
   scoreText: {fileID: 1970080570}
   pauseMenu: {fileID: 1366319149}
   controlsMenu: {fileID: 1718643195}
-  audioComp: {fileID: 0}
 --- !u!82 &1854076277
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1691,7 +1690,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854076273}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e65f7e651d1da7f4fafe5780799b07dc, type: 3}
@@ -1787,7 +1786,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854076273}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: af50b6718e6b28349bf6abeb6129b146, type: 3}
@@ -2796,7 +2795,6 @@ MonoBehaviour:
   scoreText: {fileID: 1970080570}
   pauseMenu: {fileID: 1366319149}
   controlsMenu: {fileID: 1718643195}
-  audioComp: {fileID: 0}
 --- !u!4 &2145545150
 Transform:
   m_ObjectHideFlags: 0

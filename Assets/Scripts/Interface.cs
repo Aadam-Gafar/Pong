@@ -35,6 +35,9 @@ public class Interface : MonoBehaviour
 
     void Start()
     {
+        clickSFX = Audio.instance.clickSFX;
+        startSFX = Audio.instance.startSFX;
+
         if(SceneManager.GetActiveScene().name == "Game")
         {
             QualitySettings.vSyncCount = 0;
